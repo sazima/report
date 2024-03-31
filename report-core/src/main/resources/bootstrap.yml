@@ -19,9 +19,12 @@ spring:
   messages:
     basename: i18n/messages
   datasource:
-    url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    #    url: jdbc:mysql://10.108.26.197:3306/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    #    username: root
+    #    password: appuser@anji
+    url: jdbc:mysql://127.0.0.1:13308/aj_report?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: appuser@anji
+    password: root
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       connection-timeout: 300000  # 连接超时时间 - 默认值：30秒。
@@ -32,11 +35,11 @@ spring:
       minimum-idle: 5  # 连接池中允许的最小空闲连接数 - 默认值：10。
 
   #如果要使用redis，请参考report-core目录下的README.md文件中写的进行调整
-#  redis:
-#    host: 127.0.0.1
-#    port: 6379
-#    password: root
-#    database: 1
+  #  redis:
+  #    host: 127.0.0.1
+  #    port: 6379
+  #    password: root
+  #    database: 1
   flyway:
     enabled: true    #是否开启flyway，默认true.
     baseline-on-migrate: true
@@ -49,15 +52,15 @@ spring:
       - CREATE DATABASE IF NOT EXISTS `aj_report` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
   gaea:
     subscribes:
-      oss: #文件存储 都配置的情况下优先级minio->amazonS3->nfs
+      oss: #文件存储
         enabled: true
         ##允许上传的文件后缀
         file-type-while-list: .png|.jpg|.gif|.icon|.pdf|.xlsx|.xls|.csv|.mp4|.avi|.jpeg|.aaa|.svg
-        # 用于文件上传成功后，生成文件的下载公网完整URL，http://serverip:9095/file/download，注意填写IP必须填写后端服务所在的机器IP
-        downloadPath: http://10.108.26.197:9095/file/download
+        # 用于文件上传成功后，生成文件的下载公网完整URL
+        downloadPath: /file/download
+        #        downloadPath: http://192.168.16.120:9095/file/download
         nfs:
-          #上传对应本地全路径，注意目录不会自动创建，注意 Win是 \ 且有盘符，linux是 / 无盘符，注意目录权限问题
-          path: /app/disk/upload/
+          path: /opt/upload
         #若要使用minio文件存储，请启用以下配置
         #minio:
         #  url: http://127.0.0.1
@@ -91,7 +94,7 @@ logging:
 # 本应用自定义参数
 customer:
   # 跳过token验证和权限验证的url清单
-  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode, /v2/api-docs
+  skip-authenticate-urls: /gaeaDict/all, /login, /static, /file/download/, /index.html, /favicon.ico, /reportShare/detailByCode, /v2/api-docs,reportDashboard
   file:
     #导入导出临时文件夹 默认.代表当前目录，拼接/tmp_zip/目录
     tmpPath: .

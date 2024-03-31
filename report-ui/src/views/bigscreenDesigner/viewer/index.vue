@@ -6,7 +6,7 @@
  * @Last Modified time: 2022-5-6 11:04:24
  !-->
 <template>
-  <div class="layout">
+  <div class="layout" @dblclick="toFull">
     <div :style="bigScreenStyle">
       <widget
         v-for="(widget, index) in widgets"
@@ -37,6 +37,13 @@ export default {
     this.getData();
   },
   methods: {
+    toFull() {
+      if(document.fullscreenElement) {
+        document.exitFullscreen()
+      } else {
+        document.documentElement.requestFullscreen()
+      }
+    },
     async getData() {
       const reportCode = this.$route.query.reportCode;
       const { code, data } = await detailDashboard(reportCode);

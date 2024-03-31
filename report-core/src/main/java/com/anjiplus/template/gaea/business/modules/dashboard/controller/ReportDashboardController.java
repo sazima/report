@@ -43,7 +43,7 @@ public class ReportDashboardController {
      * @return
      */
     @GetMapping({"/{reportCode}"})
-    @Permission(code = "view", name = "查看大屏")
+//    @Permission(code = "view", name = "查看大屏")
     public ResponseBean detail(@PathVariable("reportCode") String reportCode) {
         return ResponseBean.builder().data(reportDashboardService.getDetail(reportCode)).build();
     }

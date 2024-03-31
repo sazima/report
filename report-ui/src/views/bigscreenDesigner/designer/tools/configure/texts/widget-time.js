@@ -34,6 +34,7 @@ export const widgetTime = {
           { code: 'yyyy-MM-dd hh:mm', name: '日期+时分' },
           { code: 'yyyy-MM-dd hh:mm:ss', name: '日期+时分秒' },
           { code: 'MM-dd', name: '日期无年' },
+          { code: 'MM月dd日', name: '日期无年(MM月dd日)' },
           { code: 'hh:mm', name: '时分' },
           { code: 'hh:mm:ss', name: '时分秒' },
           { code: 'year-week', name: '日期+星期' },

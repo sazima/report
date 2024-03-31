@@ -5,3 +5,11 @@
 - 5.MySQL数据存储在目录build/aj-report-mysql。
 - 6.AJ-Report执行日志存储在目录build/aj-report-logs。
 - 7.注意Dockerfile和docker-compose.yml中文件的路径、名称、参数，和你自己系统保持一致。
+
+
+
+
+
+sh build.sh
+cd doc/docker
+docker build -t aj-report -f Dockerfile ../../  
